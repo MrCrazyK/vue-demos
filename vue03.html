@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-model="text">
+        <p>{{text}}</p>
+    </div>
+
+    <div id="app">
+        <input type="text" v-model="text">
+        <p>{{text}}</p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*每一个Vue实例在其所挂载的节点内具备一个独立的scope(域),此时的数据只能在这个域内使用*/
+    var root = new Vue({
+        el:"#root",
+        data:{
+            text:""
+        }
+    })
+    var app = new Vue({
+        el:"#app",
+        data:{
+            text:""
+        }
+    })
+</script>
+</html>

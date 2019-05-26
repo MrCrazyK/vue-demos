@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        {{money | currency}}
+        {{name | capitalize}}
+        {{name | reverse}}
+        {{name | reverseTxt}}
+        <!--{{money | reverseTxt}}-->
+    </div>
+    <div id="app">
+        {{money | currency}}
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*过滤器：方便快捷的对字符进行格式化操作
+    * 全局过滤器：整个页面都可以使用
+    * 局部过滤器：只对声明过滤器的实例只用
+    * 全局的设置：Vue.filter(过滤器名，回调)
+    * 局部的设置：filters:{过滤器名(){}}
+    * 使用：{{value | filter}}
+    * */
+
+    Vue.filter("currency",(value) => {
+        return "￥ "+value.toFixed(2);
+    })
+
+    Vue.filter("reverse",(value) => {
+        return value.split("").reverse().join("");
+    })
+
+    var root = new Vue({
+        el: "#root",
+        data:{
+            money: 100000,
+            name:"jack"
+        },
+        filters:{
+            capitalize(value){
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            },
+            reverseTxt(value){
+                return value.split("").reverse().join("")
+            }
+        }
+    })
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            money:1001
+        }
+    })
+
+</script>
+</html>

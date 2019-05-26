@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!-- vue实例模板挂载区 -->
+        <h1>{{msg}}</h1>
+        <p>数量是{{count}}</p>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    console.log(Vue);
+    console.dir(Vue);
+
+    var app = new Vue({
+        el:"#root",//指定本实例需要挂载的节点
+        //template:"<h1>哈哈哈,{{msg}}</h1>",
+        data:{
+            msg:"hello,Vue",
+            count:0
+        },//初始化数据模型
+        methods:{
+            change () {
+                this.count ++;
+            }
+        }
+    });
+    console.log(app);
+    console.log(app.$options);//在Vue实例化时所设置的配置项
+    console.log(app.$el); 
+    console.log(app.$data);
+    setTimeout(() => {
+        // console.log(app);
+        app.msg = "hello world!";
+    },2000)
+    setInterval(() => {
+        // app.count ++;
+        app.change();
+    },1000)
+</script>
+</html>
