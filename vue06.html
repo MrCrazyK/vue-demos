@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-focus>
+        <!--v-color:添加此指令的标签字体颜色为后面的值-->
+        <p v-color="'red'">哈哈哈哈或</p>
+        <p v-style="{color:'blue',fontSize:'30px',fontStyle:'italic'}">哈哈哈哈或或或</p>
+    </div>
+    <div id="app">
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*自定义指令：提高代码复用度并使得js的开发更加便捷
+    全局指令：Vue.directive(指令名，配置项)
+    局部指令：directives:{指令名:{}}
+    * */
+
+    Vue.directive("focus",{
+        inserted(el){
+        //    js钩子函数
+        //    当指令所在的标签插入到页面时执行
+            console.log(el);
+            el.focus();
+        }
+    })
+
+    var root = new Vue({
+        el: "#root",
+        data:{
+
+        },
+        directives:{
+            color:{
+                inserted(el,binding){
+                    console.log(el);
+                    console.log(binding);
+                    var value = binding.value;
+                    el.style.color = value;
+                }
+            },
+            style:{
+                inserted(el,binding){
+                    // var colorvalue = binding.value.color;
+                    // var fontsizevalue = binding.value.fontSize;
+                    // var fontstylevalue = binding.value.fontStyle;
+                    // el.style.color = colorvalue;
+                    // el.style.fontSize = fontsizevalue;
+                    // el.style.fontStyle = fontstylevalue;
+                    for(var key in binding.value){
+                        // console.log(key);
+                        el.style[key] = binding.value[key];
+                    }
+
+                }
+            }
+        }
+    })
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            money:1001
+        }
+    })
+
+</script>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <button @click="add">{{count}}</button>
+        <button @click="destroy">销毁</button>
+    </div>
+    <div id="app">
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*生命周期：实例的生命历程（从创建到销毁）
+    * 生命周期钩子函数：实例到达某个时期时就会触发对应的回调函数，这些函数就是生命周期钩子函数
+    * 作用：用于某个时期进行特定操作，如：需要获取dom节点
+    * 第一阶段：创建阶段
+    * beforeCreate:创建之前
+    * created:创建完成之后，此时可以获得data，methods，以及一些事件，此时一般会获取初始化页面的数据
+    * 第二阶段：挂载阶段
+    * beforeMount:挂载之前，此时仅仅加载el
+    * render:渲染，综合data，methods，事件，模板，el生成虚拟DOM
+    * mounted:挂载之后，已经将虚拟DOM与真实DOM，将虚拟DOM插入到根节点中，在此时可以获取DOM节点
+    * 第三阶段:更新阶段
+    * beforeUpdate:data中的数据改变，就会触发这个函数
+    * updated:将虚拟DOM与真实DOM进行对比，并更新其中差异部分的DOM
+    * 第四阶段：销毁阶段
+    * beforeDestroy:销毁之前
+    * destroyed:销毁之后，去除data中的侦听器以及实例中的事件
+    * */
+
+    var root = new Vue({
+        el: "#root",
+        data:{
+            count:0
+        },
+        methods:{
+            add () {
+                this.count ++;
+            },
+            destroy () {
+                this.$destroy();
+            }
+        },
+        beforeCreate () {
+            console.log("beforeCreate");
+            console.log("beforeCreate",this.count);
+            console.log("beforeCreate",this.add)
+            console.log("beforeCreate",this.$el)
+        },
+        created () {
+            console.log("created");
+            console.log("created",this.count);
+            console.log("created",this.add)
+            console.log("created",this.$el)
+        },
+        beforeMount () {
+            console.log("beforeMount")
+            console.log("beforeMount",this.count);
+            console.log("beforeMount",this.add)
+            console.log("beforeMount",this.$el)
+        },
+        mounted () {
+            console.log("mounted");
+        },
+        beforeUpdate () {
+            console.log("beforeUpdate");
+        },
+        updated () {
+            console.log("updated");
+        },
+        beforeDestroy () {
+            console.log("beforeDestroy");
+        },
+        destroyed () {
+            console.log("destroyed");
+        }
+    })
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            money:1001
+        }
+    })
+
+</script>
+</html>
