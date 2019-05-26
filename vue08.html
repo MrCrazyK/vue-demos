@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-header></my-header>
+        <my-footer></my-footer>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*组件：对结构层以及行为层的封装，实质上是根据设计图将页面分为不同的块，来实现结构层的封装复用
+    * 组件的注册方式：
+    * 使用Vue.component(组件名，配置项)全局注册
+    * 局部注册：components:{组件名：配置项}
+    * 组件中的data必须是一个function
+    * 组件必须包裹在一个根节点
+    * */
+
+    var obj = {
+        msg:"hello world",
+        count:0
+    }
+
+    Vue.component("myComponent",{
+        template: `<div>
+<p>this is my component,{{msg}}</p>
+<button @click="count++">{{count}}</button>
+</div>
+`,
+        data: function () {
+            return {
+                msg:"hi, boy!",
+                count:0
+            };
+        }
+    })
+
+    var MyFooter = {
+        template: `<div @click="click">this id footer</div>`,
+        methods:{
+            click () {
+                alert("点到了🙂");
+            }
+        }
+    }
+    new Vue({
+        el: "#root",
+        data:{},
+        components:{
+            myHeader:{
+                template: `<div>this is header</div>`
+            },
+            // MyFooter:MyFooter
+            MyFooter
+        }
+    })
+
+
+
+</script>
+</html>

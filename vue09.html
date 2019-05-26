@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <my-content></my-content>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    /*组件：对结构层以及行为层的封装，实质上是根据设计图将页面分为不同的块，来实现结构层的封装复用
+    * 组件的注册方式：
+    * 使用Vue.component(组件名，配置项)全局注册
+    * 局部注册：components:{组件名：配置项}
+    * 组件中的data必须是一个function
+    * 组件必须包裹在一个根节点
+    * 组件内可以嵌套其他组件
+    * */
+    Vue.component("my-content",{
+        template:`<div>
+<h3>内容组件</h3>
+<list></list>
+</div>`
+    })
+
+    var ListItem = {
+        template:`<div>列表项组件</div>`
+    }
+    Vue.component("list",{
+        template:`
+        <div>
+        <strong>列表组件</strong>
+        <list-item></list-item>
+</div>
+        `,
+        components:{
+            ListItem
+        }
+    })
+    new Vue({
+        el: "#root",
+        data:{},
+        components:{
+
+        }
+    })
+
+
+
+</script>
+</html>
